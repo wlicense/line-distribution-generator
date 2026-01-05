@@ -10,13 +10,103 @@ from distribution_generator_perfect import DistributionGenerator
 # ページ設定
 st.set_page_config(
     page_title="LINE配信文章生成AIエージェント",
-    page_icon="🤖",
+    page_icon="💬",
     layout="wide"
 )
 
+# LINEカラーのカスタムCSS
+st.markdown("""
+<style>
+    /* LINE風のデザイン */
+    .stApp {
+        background: linear-gradient(135deg, #F0F9F4 0%, #FFFFFF 100%);
+    }
+
+    /* ヘッダーをLINEグリーンに */
+    h1 {
+        color: #06C755 !important;
+        font-weight: 700 !important;
+        text-shadow: 0 2px 4px rgba(6, 199, 85, 0.1);
+    }
+
+    h2, h3 {
+        color: #00A300 !important;
+        font-weight: 600 !important;
+    }
+
+    /* ボタンをLINE風に */
+    .stButton>button {
+        background: linear-gradient(135deg, #06C755 0%, #00B900 100%) !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 8px !important;
+        padding: 12px 24px !important;
+        font-weight: 600 !important;
+        box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .stButton>button:hover {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 6px 16px rgba(6, 199, 85, 0.4) !important;
+    }
+
+    /* サイドバー */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, #F0F9F4 0%, #FFFFFF 100%) !important;
+        border-right: 2px solid #06C75520 !important;
+    }
+
+    /* 成功メッセージをLINE風に */
+    .stSuccess {
+        background-color: #E8F8EF !important;
+        border-left: 4px solid #06C755 !important;
+    }
+
+    /* プログレスバー */
+    .stProgress > div > div {
+        background-color: #06C755 !important;
+    }
+
+    /* インプットフィールド */
+    .stTextInput>div>div>input,
+    .stTextArea>div>div>textarea {
+        border: 2px solid #E8F8EF !important;
+        border-radius: 8px !important;
+    }
+
+    .stTextInput>div>div>input:focus,
+    .stTextArea>div>div>textarea:focus {
+        border-color: #06C755 !important;
+        box-shadow: 0 0 0 2px rgba(6, 199, 85, 0.1) !important;
+    }
+
+    /* エキスパンダー */
+    .streamlit-expanderHeader {
+        background-color: #F0F9F4 !important;
+        border-radius: 8px !important;
+        border-left: 4px solid #06C755 !important;
+    }
+
+    /* メトリクスカード */
+    [data-testid="stMetricValue"] {
+        color: #06C755 !important;
+        font-weight: 700 !important;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # タイトル
-st.title("🤖 LINE配信文章生成AIエージェント")
-st.markdown("---")
+st.markdown("""
+<div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #06C755 0%, #00B900 100%); border-radius: 16px; margin-bottom: 30px; box-shadow: 0 8px 24px rgba(6, 199, 85, 0.3);'>
+    <h1 style='color: white !important; font-size: 2.5em; margin: 0; text-shadow: 0 2px 8px rgba(0,0,0,0.1);'>
+        💬 LINE配信文章生成AIエージェント
+    </h1>
+    <p style='color: white; opacity: 0.95; margin-top: 10px; font-size: 1.1em;'>
+        Claude AI × LINE で自動生成する17本の配信文
+    </p>
+</div>
+""", unsafe_allow_html=True)
 
 # 説明
 st.markdown("""
@@ -209,8 +299,13 @@ if submitted:
 # フッター
 st.markdown("---")
 st.markdown("""
-<div style='text-align: center; color: gray;'>
-    <p>🤖 LINE配信文章生成AIエージェント v2.0</p>
-    <p>Powered by Claude (Anthropic) & Streamlit</p>
+<div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #F0F9F4 0%, #E8F8EF 100%); border-radius: 12px; margin-top: 30px;'>
+    <p style='color: #06C755; font-size: 1.2em; font-weight: 600; margin: 0;'>💬 LINE配信文章生成AIエージェント v2.0</p>
+    <p style='color: #00A300; margin-top: 8px; margin-bottom: 0;'>Powered by Claude (Anthropic) × Google Sheets</p>
+    <p style='color: #888; font-size: 0.9em; margin-top: 8px;'>
+        <span style='margin: 0 8px;'>🚀 Streamlit</span>
+        <span style='margin: 0 8px;'>🤖 Claude AI</span>
+        <span style='margin: 0 8px;'>📊 Google Sheets</span>
+    </p>
 </div>
 """, unsafe_allow_html=True)
