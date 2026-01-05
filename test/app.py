@@ -445,10 +445,11 @@ with st.form("event_params"):
     col1, col2 = st.columns(2)
 
     with col1:
-        concept = st.text_input(
+        concept = st.text_area(
             "💡 イベントのコンセプト",
             value="AI ALL STARS 未来トークセッション2026",
-            help="イベントの名称やキャッチコピーを入力してください"
+            help="イベントの名称やキャッチコピーを入力してください",
+            height=200
         )
 
         target = st.text_area(
