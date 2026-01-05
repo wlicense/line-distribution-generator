@@ -14,84 +14,235 @@ st.set_page_config(
     layout="wide"
 )
 
-# LINEカラーのカスタムCSS
+# Beautiful LINE Design with Glassmorphism
 st.markdown("""
 <style>
-    /* LINE風のデザイン */
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700;900&display=swap');
+
+    /* Beautiful gradient background */
     .stApp {
-        background: linear-gradient(135deg, #F0F9F4 0%, #FFFFFF 100%);
+        background: linear-gradient(135deg, #E8F8EF 0%, #F5FCFA 50%, #FFFFFF 100%);
+        font-family: 'Noto Sans JP', sans-serif;
     }
 
-    /* ヘッダーをLINEグリーンに */
+    /* Beautiful headers with LINE colors */
     h1 {
         color: #06C755 !important;
-        font-weight: 700 !important;
-        text-shadow: 0 2px 4px rgba(6, 199, 85, 0.1);
+        font-weight: 900 !important;
+        text-shadow: 0 4px 12px rgba(6, 199, 85, 0.15);
+        letter-spacing: -0.5px;
     }
 
-    h2, h3 {
+    h2 {
         color: #00A300 !important;
+        font-weight: 700 !important;
+        letter-spacing: -0.3px;
+    }
+
+    h3 {
+        color: #00B900 !important;
         font-weight: 600 !important;
     }
 
-    /* ボタンをLINE風に */
+    /* Beautiful glassmorphism button */
     .stButton>button {
         background: linear-gradient(135deg, #06C755 0%, #00B900 100%) !important;
         color: white !important;
         border: none !important;
-        border-radius: 8px !important;
-        padding: 12px 24px !important;
-        font-weight: 600 !important;
-        box-shadow: 0 4px 12px rgba(6, 199, 85, 0.3) !important;
-        transition: all 0.3s ease !important;
+        border-radius: 16px !important;
+        padding: 16px 32px !important;
+        font-weight: 700 !important;
+        font-size: 1.1em !important;
+        box-shadow: 0 8px 32px rgba(6, 199, 85, 0.25),
+                    0 4px 16px rgba(6, 199, 85, 0.15) !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        position: relative !important;
+        overflow: hidden !important;
+    }
+
+    .stButton>button::before {
+        content: '' !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: -100% !important;
+        width: 100% !important;
+        height: 100% !important;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent) !important;
+        transition: left 0.5s !important;
+    }
+
+    .stButton>button:hover::before {
+        left: 100% !important;
     }
 
     .stButton>button:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 6px 16px rgba(6, 199, 85, 0.4) !important;
+        transform: translateY(-4px) scale(1.02) !important;
+        box-shadow: 0 12px 48px rgba(6, 199, 85, 0.35),
+                    0 8px 24px rgba(6, 199, 85, 0.2) !important;
     }
 
-    /* サイドバー */
+    .stButton>button:active {
+        transform: translateY(-1px) scale(0.98) !important;
+    }
+
+    /* Beautiful glassmorphism sidebar */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #F0F9F4 0%, #FFFFFF 100%) !important;
-        border-right: 2px solid #06C75520 !important;
+        background: linear-gradient(180deg,
+            rgba(240, 249, 244, 0.95) 0%,
+            rgba(255, 255, 255, 0.95) 100%) !important;
+        backdrop-filter: blur(20px) !important;
+        border-right: none !important;
+        box-shadow: 4px 0 24px rgba(6, 199, 85, 0.05) !important;
     }
 
-    /* 成功メッセージをLINE風に */
+    /* Beautiful success messages */
     .stSuccess {
-        background-color: #E8F8EF !important;
-        border-left: 4px solid #06C755 !important;
+        background: linear-gradient(135deg, #E8F8EF 0%, #F0FCF5 100%) !important;
+        border-left: 5px solid #06C755 !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        box-shadow: 0 4px 16px rgba(6, 199, 85, 0.1) !important;
+        animation: slideInRight 0.5s ease-out !important;
     }
 
-    /* プログレスバー */
+    /* Beautiful animated progress bar */
     .stProgress > div > div {
-        background-color: #06C755 !important;
+        background: linear-gradient(90deg, #06C755 0%, #00B900 100%) !important;
+        border-radius: 10px !important;
+        box-shadow: 0 2px 8px rgba(6, 199, 85, 0.3) !important;
+        animation: pulse 2s ease-in-out infinite !important;
     }
 
-    /* インプットフィールド */
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.8; }
+    }
+
+    /* Beautiful input fields with glassmorphism */
     .stTextInput>div>div>input,
     .stTextArea>div>div>textarea {
-        border: 2px solid #E8F8EF !important;
-        border-radius: 8px !important;
+        background: rgba(255, 255, 255, 0.9) !important;
+        border: 2px solid rgba(6, 199, 85, 0.15) !important;
+        border-radius: 12px !important;
+        padding: 12px 16px !important;
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03) !important;
     }
 
     .stTextInput>div>div>input:focus,
     .stTextArea>div>div>textarea:focus {
         border-color: #06C755 !important;
-        box-shadow: 0 0 0 2px rgba(6, 199, 85, 0.1) !important;
+        box-shadow: 0 0 0 4px rgba(6, 199, 85, 0.1),
+                    0 4px 16px rgba(6, 199, 85, 0.15) !important;
+        background: rgba(255, 255, 255, 1) !important;
+        transform: translateY(-2px) !important;
     }
 
-    /* エキスパンダー */
+    /* Beautiful form labels */
+    .stTextInput>label,
+    .stTextArea>label {
+        color: #00A300 !important;
+        font-weight: 600 !important;
+        font-size: 0.95em !important;
+        margin-bottom: 8px !important;
+    }
+
+    /* Beautiful expander with glassmorphism */
     .streamlit-expanderHeader {
-        background-color: #F0F9F4 !important;
-        border-radius: 8px !important;
-        border-left: 4px solid #06C755 !important;
+        background: linear-gradient(135deg,
+            rgba(240, 249, 244, 0.8) 0%,
+            rgba(255, 255, 255, 0.8) 100%) !important;
+        backdrop-filter: blur(10px) !important;
+        border-radius: 12px !important;
+        border-left: 5px solid #06C755 !important;
+        padding: 16px !important;
+        box-shadow: 0 4px 16px rgba(6, 199, 85, 0.08) !important;
+        transition: all 0.3s ease !important;
     }
 
-    /* メトリクスカード */
+    .streamlit-expanderHeader:hover {
+        background: linear-gradient(135deg,
+            rgba(240, 249, 244, 1) 0%,
+            rgba(255, 255, 255, 1) 100%) !important;
+        box-shadow: 0 6px 24px rgba(6, 199, 85, 0.12) !important;
+        transform: translateX(4px) !important;
+    }
+
+    /* Beautiful metrics cards */
     [data-testid="stMetricValue"] {
         color: #06C755 !important;
-        font-weight: 700 !important;
+        font-weight: 900 !important;
+        font-size: 2em !important;
+    }
+
+    [data-testid="stMetric"] {
+        background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(240, 249, 244, 0.9) 100%) !important;
+        padding: 20px !important;
+        border-radius: 16px !important;
+        border: 2px solid rgba(6, 199, 85, 0.1) !important;
+        box-shadow: 0 8px 24px rgba(6, 199, 85, 0.08) !important;
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    [data-testid="stMetric"]:hover {
+        transform: translateY(-4px) !important;
+        box-shadow: 0 12px 32px rgba(6, 199, 85, 0.15) !important;
+    }
+
+    /* Beautiful animations */
+    @keyframes slideInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Beautiful columns */
+    [data-testid="column"] {
+        animation: fadeIn 0.6s ease-out !important;
+    }
+
+    /* Beautiful form container */
+    [data-testid="stForm"] {
+        background: linear-gradient(135deg,
+            rgba(255, 255, 255, 0.95) 0%,
+            rgba(240, 249, 244, 0.95) 100%) !important;
+        backdrop-filter: blur(20px) !important;
+        border-radius: 24px !important;
+        padding: 32px !important;
+        box-shadow: 0 12px 48px rgba(6, 199, 85, 0.08),
+                    0 0 1px rgba(6, 199, 85, 0.1) !important;
+        border: 1px solid rgba(6, 199, 85, 0.1) !important;
+    }
+
+    /* Beautiful divider */
+    hr {
+        border: none !important;
+        height: 2px !important;
+        background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(6, 199, 85, 0.3) 50%,
+            transparent 100%) !important;
+        margin: 32px 0 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -103,7 +254,7 @@ st.markdown("""
         💬 LINE配信文章生成AIエージェント
     </h1>
     <p style='color: white; opacity: 0.95; margin-top: 10px; font-size: 1.1em;'>
-        Claude AI × LINE で自動生成する17本の配信文
+        AIが自動生成する17本の配信文
     </p>
 </div>
 """, unsafe_allow_html=True)
@@ -120,18 +271,8 @@ st.markdown("""
 
 st.markdown("---")
 
-# サイドバーで環境変数の設定状況を表示
+# サイドバー
 with st.sidebar:
-    st.header("⚙️ 設定状況")
-
-    anthropic_key = os.environ.get("ANTHROPIC_API_KEY")
-    if anthropic_key and anthropic_key.startswith("sk-ant-"):
-        st.success("✅ ANTHROPIC_API_KEY: 設定済み")
-    else:
-        st.error("❌ ANTHROPIC_API_KEY: 未設定")
-        st.info("環境変数 `ANTHROPIC_API_KEY` を設定してください")
-
-    st.markdown("---")
     st.markdown("### 📖 ガイド")
     st.markdown("""
     **コンセプト**: イベントの名称やキャッチコピー
@@ -202,7 +343,7 @@ if submitted:
     if not all([concept, target, problems, ideal_future, achievements]):
         st.error("❌ すべての項目を入力してください")
     elif not os.environ.get("ANTHROPIC_API_KEY"):
-        st.error("❌ ANTHROPIC_API_KEY が設定されていません")
+        st.error("❌ システム設定エラーが発生しました。管理者にお問い合わせください。")
     else:
         # パラメータをまとめる
         params = {
@@ -301,11 +442,11 @@ st.markdown("---")
 st.markdown("""
 <div style='text-align: center; padding: 20px; background: linear-gradient(135deg, #F0F9F4 0%, #E8F8EF 100%); border-radius: 12px; margin-top: 30px;'>
     <p style='color: #06C755; font-size: 1.2em; font-weight: 600; margin: 0;'>💬 LINE配信文章生成AIエージェント v2.0</p>
-    <p style='color: #00A300; margin-top: 8px; margin-bottom: 0;'>Powered by Claude (Anthropic) × Google Sheets</p>
+    <p style='color: #00A300; margin-top: 8px; margin-bottom: 0;'>AIが17本の配信文を自動生成</p>
     <p style='color: #888; font-size: 0.9em; margin-top: 8px;'>
-        <span style='margin: 0 8px;'>🚀 Streamlit</span>
-        <span style='margin: 0 8px;'>🤖 Claude AI</span>
-        <span style='margin: 0 8px;'>📊 Google Sheets</span>
+        <span style='margin: 0 8px;'>💬 LINE配信最適化</span>
+        <span style='margin: 0 8px;'>📊 スプレッドシート自動出力</span>
+        <span style='margin: 0 8px;'>⚡ 高速生成</span>
     </p>
 </div>
 """, unsafe_allow_html=True)
