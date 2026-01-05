@@ -5,7 +5,7 @@ LINE配信文章生成Webアプリ（Streamlit版）
 
 import streamlit as st
 import os
-from distribution_generator_perfect import DistributionGeneratorPerfect
+from distribution_generator_perfect import DistributionGenerator
 
 # ページ設定
 st.set_page_config(
@@ -132,7 +132,7 @@ if submitted:
 
         try:
             # ジェネレーターを初期化
-            generator = DistributionGeneratorPerfect()
+            generator = DistributionGenerator()
 
             # 配信文を生成
             status_text.text("📝 17本の配信文を生成中...")
