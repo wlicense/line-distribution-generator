@@ -427,7 +427,7 @@ st.markdown("---")
 with st.sidebar:
     st.markdown("### 📖 入力ガイド")
     st.markdown("""
-    **コンセプト**: イベントの名称やキャッチコピー
+    **コンセプト**: イベントの中心テーマや企画の核となる考え方
 
     **ターゲット**: 想定する参加者層
 
@@ -448,7 +448,7 @@ with st.form("event_params"):
         concept = st.text_area(
             "💡 コンセプト",
             value="AI ALL STARS 未来トークセッション2026",
-            help="イベントの名称やキャッチコピーを入力してください",
+            help="イベントの中心テーマや企画の核となる考え方を入力してください",
             height=200
         )
 
