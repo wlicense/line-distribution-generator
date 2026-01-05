@@ -10,6 +10,8 @@ LINE配信文章生成AIエージェント（完全再現版）
 
 import anthropic
 import os
+import json
+import tempfile
 from typing import Dict, List
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
@@ -17,7 +19,21 @@ from datetime import datetime
 
 # 環境変数からAPIキーを取得
 ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY')
-CREDENTIALS_PATH = '/Users/hajime/Downloads/line-nao-1-8919545f6d51.json'
+
+# Google認証情報の設定（環境変数またはローカルファイル）
+def get_credentials_path():
+    """環境変数からGoogle認証情報を取得、または既存のファイルパスを返す"""
+    credentials_json = os.environ.get('GOOGLE_CREDENTIALS_JSON')
+    if credentials_json:
+        # 環境変数から取得した場合、一時ファイルに書き込み
+        with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.json') as f:
+            f.write(credentials_json)
+            return f.name
+    else:
+        # ローカル開発環境用
+        return '/Users/hajime/Downloads/line-nao-1-8919545f6d51.json'
+
+CREDENTIALS_PATH = get_credentials_path()
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
 
 # 既存のスプレッドシートID
